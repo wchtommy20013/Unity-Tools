@@ -99,14 +99,16 @@ public class LocalizationBundleCreator : EditorWindow
 			for (var i = 0; i < d.Keys.Count; ++i) {
 				var key = d.Keys.ToArray () [i];
 
-				if (d [key] == true && key != "share") {
-					string guid = AssetDatabase.CreateFolder (_lastselectedAssetPath, key);
-					string _LocalizationFolderPath = AssetDatabase.GUIDToAssetPath (guid);
-					string _defaultFolder = AssetDatabase.CreateFolder (_LocalizationFolderPath, "default");
+				if(!AssetDatabase.IsValidFolder(_lastselectedAssetPath+"/"+key)){
+					if (d [key] == true && key != "share") {
+						string guid = AssetDatabase.CreateFolder (_lastselectedAssetPath, key);
+						string _LocalizationFolderPath = AssetDatabase.GUIDToAssetPath (guid);
+						string _defaultFolder = AssetDatabase.CreateFolder (_LocalizationFolderPath, "default");
 
-				} else if (d [key] == true && key == "share") 
-				{
-					string shareID = AssetDatabase.CreateFolder (_lastselectedAssetPath, key);
+					} else if (d [key] == true && key == "share") 
+					{
+						string shareID = AssetDatabase.CreateFolder (_lastselectedAssetPath, key);
+					}
 				}
 			}
 
