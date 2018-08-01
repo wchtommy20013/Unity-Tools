@@ -2,7 +2,7 @@
 |Action                         |Hotkeys            |
 |-------------------------------|-------------------|
 |Setting scene object active    | A                 |
-|Apply prefab changes           | CMD + SHIFT + P   |
+|Apply prefab changes           | P                 |
 
 #TextMeshPro Extension
 //TODO
