@@ -4,7 +4,7 @@ using UnityEditor;
 public class CustomHotKeys : MonoBehaviour
 {
 
-    [MenuItem("GameObject/ActiveToggle _a")]
+    [MenuItem("GameObject/Custom HotKeys/ActiveToggle _a")]
     public static void ToggleActivationSelection()
     {
         foreach(GameObject go in Selection.gameObjects)
@@ -12,7 +12,7 @@ public class CustomHotKeys : MonoBehaviour
     }
 
 
-    [MenuItem("GameObject/Apply Prefab Changes %#p")]
+    [MenuItem("GameObject/Custom HotKeys/Apply Prefab Changes _p")]
     public static void applyPrefabChanges()
     {
         var obj = Selection.activeGameObject;
