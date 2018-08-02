@@ -16,8 +16,8 @@ public class SpriteLinkageCollection
 
 		this.linkages = new List<SpriteLinkage> ();
 		foreach (SpriteRenderer ren in from_renderers) {
-			if (linkages.Any (x => x.sprite.Equals (ren.sprite))) {
-				linkages.Where (x => x.sprite.Equals (ren.sprite)).First ().renderers.Add (ren);
+			if (linkages.Any (x => x.obj.Equals (ren.sprite))) {
+				linkages.Where (x => x.obj.Equals (ren.sprite)).First ().renderers.Add (ren);
 			} else {
 				linkages.Add(new SpriteLinkage(ren)); 
 			}

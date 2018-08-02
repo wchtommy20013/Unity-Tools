@@ -13,10 +13,17 @@ public class SpriteReplacePanel : EditorWindow {
 
 	SpriteLinkageCollection slc;
 
+	int edit_type = 0;
+	string[] options = new string[]
+	{
+		"Sprite", "Material", 
+	};
+
 	[MenuItem ("Window/Sprite Replace Panel")]
 	public static void ShowWindow () {
 		EditorWindow.GetWindow (typeof(SpriteReplacePanel));
 	}
+
 
 	void OnGUI () {
 		EditorGUILayout.BeginHorizontal();
@@ -24,11 +31,18 @@ public class SpriteReplacePanel : EditorWindow {
 		var tmp_source = EditorGUILayout.ObjectField(source, typeof(Object), true) as GameObject;
 		EditorGUILayout.EndHorizontal();
 
+		edit_type = EditorGUILayout.Popup("Label", edit_type, options);
+
+
 		if (_IsSourceModified(tmp_source)) {
 			source = tmp_source;
-
-			slc = new SpriteLinkageCollection (source.GetComponentsInChildren(typeof(SpriteRenderer)));
+			if (edit_type == 0) {
+				slc = new SpriteLinkageCollection (source.GetComponentsInChildren (typeof(SpriteRenderer)));
+			} else if (edit_type == 1) {
+				//slc = new SpriteLinkageCollection (source.GetComponentsInChildren (typeof(SpriteRenderer)));
+			}
 		}
+
 
 		_DisplayMainView ();
 
@@ -54,12 +68,15 @@ public class SpriteReplacePanel : EditorWindow {
 			_scrollPosition = EditorGUILayout.BeginScrollView (_scrollPosition);
 			_SetColumnHeader ();
 
-			foreach(SpriteLinkage sl in slc.linkages){
+			foreach(var sl in slc.linkages){
 				EditorGUILayout.BeginHorizontal();
 
 				GUILayout.Label (sl.GetDisplayNames());
-				sl.sprite = EditorGUILayout.ObjectField(sl.sprite, typeof(Sprite), true, GUILayout.Width(500)) as Sprite;
-
+				if (edit_type == 0) {
+					sl.obj = EditorGUILayout.ObjectField (sl.obj, typeof(Sprite), true, GUILayout.Width (500)) as Sprite;
+				} else if (edit_type == 1) {
+					//sl.obj = EditorGUILayout.ObjectField (sl.obj, typeof(Material), true, GUILayout.Width (500)) as Material;
+				}
 				slc.ApplyChanges ();
 				EditorGUILayout.EndHorizontal();
 			}
